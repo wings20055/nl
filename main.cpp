@@ -14,7 +14,7 @@ int main() {
     Perceptron p(data, 4, 3, 1.5, 1.0);
 
     // Train the perceptron
-    for (int i = 0; i < 10; i++) {
+    for (int i = 0; i < 1000; i++) {
         p.train();
     }
 
