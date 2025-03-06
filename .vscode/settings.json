@@ -1,0 +1,5 @@
+{
+    "editor.tabSize": 4,
+    "css.format.braceStyle": "collapse",
+    "less.format.braceStyle": "collapse"
+}
