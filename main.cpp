@@ -1,28 +1,33 @@
+#include <cstdlib>
+#include <ctime>
 #include <iostream>
 #include <vector>
-#include "hebb.h"
+
+#include "MLP.h"
 int main() {
-    // XOR dataset (not linearly separable)
-    int dataset[4][3] = {{0, 0, 0},
-                         {0, 1, 0},
-                         {1, 0, 0},
-                         {1, 1, 0}};
+    // Seed random number
+    srand(time(0));
 
-    int *data[4] = {dataset[0], dataset[1], dataset[2], dataset[3]};
-    Perceptron p(data, 4, 3, 1.5, 1.0);
+    MLP mlp(2, 2, 1, 0.1);
 
-    // Train the perceptron
-    for (int i = 0; i < 1000; i++) {
-        p.train();
+    // XOR dataset
+    std::vector<std::vector<double>> xor_data = { //change these parameters based on whatever function you need
+        {0, 0, 1},  
+        {0, 1, 1},
+        {1, 0, 1},
+        {1, 1, 0}};
+    std::cout << "starting" << '\n';
+    // Train the MLP
+    for (int epoch = 0; epoch < 10000; ++epoch) {
+        mlp.train(xor_data);
     }
-
-    // Print final weights and bias
-    p.printWeights();
-
-    // Test predictions
-    std::cout << "Predictions:" << std::endl;
-    for (int i = 0; i < 4; i++) {
-        std::cout << "Input: (" << data[i][0] << ", " << data[i][1] << ") -> Prediction: " << p.predict(data[i]) << std::endl;
+    std::cout << "done" << '\n';
+    // Test the MLP
+    for (const auto &data : xor_data) {
+        std::vector<double> input = {data[0], data[1]};
+        int prediction = mlp.predict(input);
+        std::cout << "Input: (" << input[0] << ", " << input[1]
+                  << ") -> Prediction: " << prediction << std::endl;
     }
 
     return 0;
