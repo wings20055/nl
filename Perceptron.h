@@ -1,16 +1,7 @@
 #include <iostream>
 #include <vector>
+#include "funs.h"
 
-// Dot product function for 2D weights
-int dot(std::vector<std::vector<double>> &weights, int *input, int rows, int cols) {
-    int res = 0;
-    for (int i = 0; i < rows; i++) {
-        for (int j = 0; j < cols - 1; j++) {
-            res += weights[i][j] * input[j];
-        }
-    }
-    return res;
-}
 
 class Perceptron {
 public:
@@ -36,7 +27,7 @@ public:
             double z1 = (dataset[i][0]+(dataset[i][1]+1)%2);
             double z2 = ((dataset[i][0]+1)%2+dataset[i][1]);
             double sum = weights[0]*z1 + weights[1]*z2;
-            int pred = (sum>threshold) ? 1: 0;
+            int pred = (sum>=threshold) ? 1: 0;
             int error = dataset[i][2] - pred;
             weights[0] += learning_rate * error * z1;
             weights[1] += learning_rate * error * z2;

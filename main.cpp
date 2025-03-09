@@ -3,12 +3,10 @@
 #include "hebb.h"
 int main() {
     // XOR dataset (not linearly separable)
-    int dataset[4][3] = {
-        {0, 0, 0},
-        {0, 1, 1},
-        {1, 0, 1},
-        {1, 1, 0}
-    };
+    int dataset[4][3] = {{0, 0, 0},
+                         {0, 1, 0},
+                         {1, 0, 0},
+                         {1, 1, 0}};
 
     int *data[4] = {dataset[0], dataset[1], dataset[2], dataset[3]};
     Perceptron p(data, 4, 3, 1.5, 1.0);
